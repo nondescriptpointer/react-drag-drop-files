@@ -149,6 +149,7 @@ const FileUploader: React.FC<Props> = (props: Props): JSX.Element => {
 
   const handleChanges = (files: File | Array<File>): boolean => {
     let checkError = false;
+    let files_filtered = files
     if (files) {
       if (files instanceof File) {
         checkError = !validateFile(files);
@@ -166,12 +167,12 @@ const FileUploader: React.FC<Props> = (props: Props): JSX.Element => {
         if(!filtered_files.length && checkError){
           return false;
         }else{
-          files = filtered_files
+          files_filtered = filtered_files
         }
       }
 
-      if (handleChange) handleChange(files);
-      setFile(files);
+      if (handleChange) handleChange(files_filtered);
+      setFile(files_filtered);
 
       setUploaded(true);
       setError(false);
